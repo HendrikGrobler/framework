@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Session\Console\SessionTableCommand;
 use Illuminate\Foundation\Application;
+use Illuminate\Session\Console\SessionTableCommand;
 use Mockery as m;
 
 class SessionTableCommandTest extends PHPUnit_Framework_TestCase
@@ -34,7 +34,7 @@ class SessionTableCommandTest extends PHPUnit_Framework_TestCase
 
     protected function runCommand($command, $input = [])
     {
-        return $command->run(new Symfony\Component\Console\Input\ArrayInput($input), new Symfony\Component\Console\Output\NullOutput);
+        return $command->run(new Symfony\Component\Console\Input\ArrayInput($input), new Symfony\Component\Console\Output\NullOutput());
     }
 }
 

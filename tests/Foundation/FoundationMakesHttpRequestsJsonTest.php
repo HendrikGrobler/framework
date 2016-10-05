@@ -8,32 +8,32 @@ class FoundationMakesHttpRequestsJsonTest extends PHPUnit_Framework_TestCase
 
     public function testSeeJsonWithArray()
     {
-        $this->response = new Illuminate\Http\Response(new JsonSerializableSingleResourceStub);
+        $this->response = new Illuminate\Http\Response(new JsonSerializableSingleResourceStub());
 
-        $resource = new JsonSerializableSingleResourceStub;
+        $resource = new JsonSerializableSingleResourceStub();
 
         $this->seeJson($resource->jsonSerialize());
     }
 
     public function testSeeJsonWithMixed()
     {
-        $this->response = new Illuminate\Http\Response(new JsonSerializableMixedResourcesStub);
+        $this->response = new Illuminate\Http\Response(new JsonSerializableMixedResourcesStub());
 
-        $resource = new JsonSerializableMixedResourcesStub;
+        $resource = new JsonSerializableMixedResourcesStub();
 
         $this->seeJson($resource->jsonSerialize());
     }
 
     public function testSeeJsonDeeplyNestedPart()
     {
-        $this->response = new Illuminate\Http\Response(new JsonSerializableMixedResourcesStub);
+        $this->response = new Illuminate\Http\Response(new JsonSerializableMixedResourcesStub());
 
         $this->seeJson(['bar' => ['foo' => 'bar 0', 'bar' => 'foo 0']]);
     }
 
     public function testSeeJsonStructure()
     {
-        $this->response = new Illuminate\Http\Response(new JsonSerializableMixedResourcesStub);
+        $this->response = new Illuminate\Http\Response(new JsonSerializableMixedResourcesStub());
 
         // At root
         $this->seeJsonStructure(['foo']);
@@ -48,7 +48,7 @@ class FoundationMakesHttpRequestsJsonTest extends PHPUnit_Framework_TestCase
         $this->seeJsonStructure(['baz' => ['*' => ['foo', 'bar' => ['foo', 'bar']]]]);
 
         // Wildcard (repeating structure) at root
-        $this->response = new Illuminate\Http\Response(new JsonSerializableSingleResourceStub);
+        $this->response = new Illuminate\Http\Response(new JsonSerializableSingleResourceStub());
         $this->seeJsonStructure(['*' => ['foo', 'bar', 'foobar']]);
     }
 }
@@ -58,7 +58,7 @@ class JsonSerializableMixedResourcesStub implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'foo' => 'bar',
+            'foo'    => 'bar',
             'foobar' => [
                 'foobar_foo' => 'foo',
                 'foobar_bar' => 'bar',

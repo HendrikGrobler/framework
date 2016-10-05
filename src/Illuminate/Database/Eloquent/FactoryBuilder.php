@@ -46,10 +46,11 @@ class FactoryBuilder
     /**
      * Create an new builder instance.
      *
-     * @param  string  $class
-     * @param  string  $name
-     * @param  array  $definitions
-     * @param  \Faker\Generator  $faker
+     * @param string           $class
+     * @param string           $name
+     * @param array            $definitions
+     * @param \Faker\Generator $faker
+     *
      * @return void
      */
     public function __construct($class, $name, array $definitions, Faker $faker)
@@ -63,7 +64,8 @@ class FactoryBuilder
     /**
      * Set the amount of models you wish to create / make.
      *
-     * @param  int  $amount
+     * @param int $amount
+     *
      * @return $this
      */
     public function times($amount)
@@ -76,7 +78,8 @@ class FactoryBuilder
     /**
      * Create a collection of models and persist them to the database.
      *
-     * @param  array  $attributes
+     * @param array $attributes
+     *
      * @return mixed
      */
     public function create(array $attributes = [])
@@ -97,7 +100,8 @@ class FactoryBuilder
     /**
      * Create a collection of models.
      *
-     * @param  array  $attributes
+     * @param array $attributes
+     *
      * @return mixed
      */
     public function make(array $attributes = [])
@@ -114,15 +118,16 @@ class FactoryBuilder
     /**
      * Make an instance of the model with the given attributes.
      *
-     * @param  array  $attributes
-     * @return \Illuminate\Database\Eloquent\Model
+     * @param array $attributes
      *
      * @throws \InvalidArgumentException
+     *
+     * @return \Illuminate\Database\Eloquent\Model
      */
     protected function makeInstance(array $attributes = [])
     {
         return Model::unguarded(function () use ($attributes) {
-            if (! isset($this->definitions[$this->class][$this->name])) {
+            if (!isset($this->definitions[$this->class][$this->name])) {
                 throw new InvalidArgumentException("Unable to locate factory with name [{$this->name}] [{$this->class}].");
             }
 
@@ -142,7 +147,8 @@ class FactoryBuilder
     /**
      * Evaluate any Closure attributes on the attribute array.
      *
-     * @param  array  $attributes
+     * @param array $attributes
+     *
      * @return array
      */
     protected function callClosureAttributes(array $attributes)

@@ -75,15 +75,16 @@ class SlackMessage
     /**
      * Set a custom user icon for the Slack message.
      *
-     * @param  string  $username
-     * @param  string|null  $icon
+     * @param string      $username
+     * @param string|null $icon
+     *
      * @return $this
      */
     public function from($username, $icon = null)
     {
         $this->username = $username;
 
-        if (! is_null($icon)) {
+        if (!is_null($icon)) {
             $this->icon = $icon;
         }
 
@@ -93,7 +94,8 @@ class SlackMessage
     /**
      * Set the Slack channel the message should be sent to.
      *
-     * @param  string $channel
+     * @param string $channel
+     *
      * @return $this
      */
     public function to($channel)
@@ -106,7 +108,8 @@ class SlackMessage
     /**
      * Set the content of the Slack message.
      *
-     * @param  string  $content
+     * @param string $content
+     *
      * @return $this
      */
     public function content($content)
@@ -119,12 +122,13 @@ class SlackMessage
     /**
      * Define an attachment for the message.
      *
-     * @param  \Closure  $callback
+     * @param \Closure $callback
+     *
      * @return $this
      */
     public function attachment(Closure $callback)
     {
-        $this->attachments[] = $attachment = new SlackAttachment;
+        $this->attachments[] = $attachment = new SlackAttachment();
 
         $callback($attachment);
 

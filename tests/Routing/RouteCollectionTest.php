@@ -26,7 +26,7 @@ class RouteCollectionTest extends PHPUnit_Framework_TestCase
     {
         $this->routeCollection->add(new Route('GET', 'foo', [
             'uses' => 'FooController@index',
-            'as' => 'foo_index',
+            'as'   => 'foo_index',
         ]));
         $this->assertCount(1, $this->routeCollection);
     }
@@ -35,7 +35,7 @@ class RouteCollectionTest extends PHPUnit_Framework_TestCase
     {
         $outputRoute = $this->routeCollection->add($inputRoute = new Route('GET', 'foo', [
             'uses' => 'FooController@index',
-            'as' => 'foo_index',
+            'as'   => 'foo_index',
         ]));
         $this->assertInstanceOf(Route::class, $outputRoute);
         $this->assertEquals($inputRoute, $outputRoute);
@@ -45,7 +45,7 @@ class RouteCollectionTest extends PHPUnit_Framework_TestCase
     {
         $this->routeCollection->add(new Route('GET', 'foo', [
             'uses' => 'FooController@index',
-            'as' => 'foo_index',
+            'as'   => 'foo_index',
         ]));
         $this->assertCount(1, $this->routeCollection);
     }
@@ -54,7 +54,7 @@ class RouteCollectionTest extends PHPUnit_Framework_TestCase
     {
         $this->routeCollection->add(new Route('GET', 'foo', [
             'uses' => 'FooController@index',
-            'as' => 'foo_index',
+            'as'   => 'foo_index',
         ]));
         $this->assertCount(1, $this->routeCollection);
     }
@@ -63,7 +63,7 @@ class RouteCollectionTest extends PHPUnit_Framework_TestCase
     {
         $this->routeCollection->add($routeIndex = new Route('GET', 'foo/index', [
             'uses' => 'FooController@index',
-            'as' => 'route_name',
+            'as'   => 'route_name',
         ]));
 
         $this->assertSame('route_name', $routeIndex->getName());
@@ -75,7 +75,7 @@ class RouteCollectionTest extends PHPUnit_Framework_TestCase
     {
         $this->routeCollection->add($routeIndex = new Route('GET', 'foo/index', $action = [
             'uses' => 'FooController@index',
-            'as' => 'route_name',
+            'as'   => 'route_name',
         ]));
 
         $this->assertSame($action, $routeIndex->getAction());
@@ -85,7 +85,7 @@ class RouteCollectionTest extends PHPUnit_Framework_TestCase
     {
         $this->routeCollection->add(new Route('GET', 'foo/index', [
             'uses' => 'FooController@index',
-            'as' => 'foo_index',
+            'as'   => 'foo_index',
         ]));
         $this->assertInstanceOf(ArrayIterator::class, $this->routeCollection->getIterator());
     }
@@ -100,13 +100,13 @@ class RouteCollectionTest extends PHPUnit_Framework_TestCase
     {
         $this->routeCollection->add($routeIndex = new Route('GET', 'foo/index', [
             'uses' => 'FooController@index',
-            'as' => 'foo_index',
+            'as'   => 'foo_index',
         ]));
         $this->assertCount(1, $this->routeCollection);
 
         $this->routeCollection->add($routeShow = new Route('GET', 'bar/show', [
             'uses' => 'BarController@show',
-            'as' => 'bar_show',
+            'as'   => 'bar_show',
         ]));
         $this->assertCount(2, $this->routeCollection);
 
@@ -117,7 +117,7 @@ class RouteCollectionTest extends PHPUnit_Framework_TestCase
     {
         $routeIndex = new Route('GET', 'foo/index', [
             'uses' => 'FooController@index',
-            'as' => 'foo_index',
+            'as'   => 'foo_index',
         ]);
 
         $this->routeCollection->add($routeIndex);
@@ -130,7 +130,7 @@ class RouteCollectionTest extends PHPUnit_Framework_TestCase
         // Add a non-existing route
         $this->routeCollection->add(new Route('GET', 'bar/show', [
             'uses' => 'BarController@show',
-            'as' => 'bar_show',
+            'as'   => 'bar_show',
         ]));
         $this->assertCount(2, $this->routeCollection);
     }
@@ -159,17 +159,17 @@ class RouteCollectionTest extends PHPUnit_Framework_TestCase
     {
         $this->routeCollection->add($routeIndex = new Route('GET', 'foo/index', [
             'uses' => 'FooController@index',
-            'as' => 'foo_index',
+            'as'   => 'foo_index',
         ]));
 
         $this->routeCollection->add($routeShow = new Route('GET', 'foo/show', [
             'uses' => 'FooController@show',
-            'as' => 'foo_show',
+            'as'   => 'foo_show',
         ]));
 
         $this->routeCollection->add($routeNew = new Route('POST', 'bar', [
             'uses' => 'BarController@create',
-            'as' => 'bar_create',
+            'as'   => 'bar_create',
         ]));
 
         $allRoutes = [

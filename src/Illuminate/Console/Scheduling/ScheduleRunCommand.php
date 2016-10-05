@@ -30,7 +30,8 @@ class ScheduleRunCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
+     *
      * @return void
      */
     public function __construct(Schedule $schedule)
@@ -52,7 +53,7 @@ class ScheduleRunCommand extends Command
         $eventsRan = 0;
 
         foreach ($events as $event) {
-            if (! $event->filtersPass($this->laravel)) {
+            if (!$event->filtersPass($this->laravel)) {
                 continue;
             }
 

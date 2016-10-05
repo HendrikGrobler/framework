@@ -2,8 +2,8 @@
 
 namespace Illuminate\Mail;
 
-use Illuminate\Contracts\Mail\Mailer as MailerContract;
 use Illuminate\Contracts\Mail\Mailable as MailableContract;
+use Illuminate\Contracts\Mail\Mailer as MailerContract;
 
 class SendQueuedMailable
 {
@@ -17,7 +17,8 @@ class SendQueuedMailable
     /**
      * Create a new job instance.
      *
-     * @param  MailableContract  $mailable
+     * @param MailableContract $mailable
+     *
      * @return void
      */
     public function __construct(MailableContract $mailable)
@@ -28,7 +29,8 @@ class SendQueuedMailable
     /**
      * Handle the queued job.
      *
-     * @param  MailerContract  $mailer
+     * @param MailerContract $mailer
+     *
      * @return void
      */
     public function handle(MailerContract $mailer)

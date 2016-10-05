@@ -35,8 +35,9 @@ class SlackAttachment
     /**
      * Set the title of the attachment.
      *
-     * @param  string  $title
-     * @param  string  $url
+     * @param string $title
+     * @param string $url
+     *
      * @return $this
      */
     public function title($title, $url = null)
@@ -50,7 +51,8 @@ class SlackAttachment
     /**
      * Set the content (text) of the attachment.
      *
-     * @param  string  $content
+     * @param string $content
+     *
      * @return $this
      */
     public function content($content)
@@ -63,7 +65,8 @@ class SlackAttachment
     /**
      * Set the fields of the attachment.
      *
-     * @param  array  $fields
+     * @param array $fields
+     *
      * @return $this
      */
     public function fields(array $fields)

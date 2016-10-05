@@ -3,11 +3,11 @@
 namespace Illuminate\Mail\Jobs;
 
 use Closure;
+use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Contracts\Queue\Job;
+use Illuminate\Queue\SerializesAndRestoresModelIdentifiers;
 use Illuminate\Support\Str;
 use SuperClosure\Serializer;
-use Illuminate\Contracts\Queue\Job;
-use Illuminate\Contracts\Mail\Mailer;
-use Illuminate\Queue\SerializesAndRestoresModelIdentifiers;
 
 class HandleQueuedMessage
 {
@@ -23,7 +23,7 @@ class HandleQueuedMessage
     /**
      * The data to be passed to the view.
      *
-     * @param  array  $data
+     * @param array $data
      */
     public $data;
 
@@ -37,9 +37,10 @@ class HandleQueuedMessage
     /**
      * Create a new job instance.
      *
-     * @param  string  $view
-     * @param  array  $data
-     * @param  \Closure  $callback
+     * @param string   $view
+     * @param array    $data
+     * @param \Closure $callback
+     *
      * @return void
      */
     public function __construct($view, $data, $callback)
@@ -52,7 +53,8 @@ class HandleQueuedMessage
     /**
      * Handle the queued job.
      *
-     * @param  \Illuminate\Contracts\Mail\Mailer  $mailer
+     * @param \Illuminate\Contracts\Mail\Mailer $mailer
+     *
      * @return void
      */
     public function handle(Mailer $mailer)
@@ -72,7 +74,7 @@ class HandleQueuedMessage
         }
 
         if ($this->callback instanceof Closure) {
-            $this->callback = (new Serializer)->serialize($this->callback);
+            $this->callback = (new Serializer())->serialize($this->callback);
         }
 
         return array_keys(get_object_vars($this));
@@ -90,7 +92,7 @@ class HandleQueuedMessage
         }
 
         if (Str::contains($this->callback, 'SerializableClosure')) {
-            $this->callback = (new Serializer)->unserialize($this->callback);
+            $this->callback = (new Serializer())->unserialize($this->callback);
         }
     }
 }

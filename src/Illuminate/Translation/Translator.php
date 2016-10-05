@@ -3,10 +3,10 @@
 namespace Illuminate\Translation;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\NamespacedItemResolver;
+use Illuminate\Support\Str;
+use Illuminate\Support\Traits\Macroable;
 use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -52,8 +52,9 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Create a new translator instance.
      *
-     * @param  \Illuminate\Translation\LoaderInterface  $loader
-     * @param  string  $locale
+     * @param \Illuminate\Translation\LoaderInterface $loader
+     * @param string                                  $locale
+     *
      * @return void
      */
     public function __construct(LoaderInterface $loader, $locale)
@@ -65,8 +66,9 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Determine if a translation exists for a given locale.
      *
-     * @param  string  $key
-     * @param  string|null  $locale
+     * @param string      $key
+     * @param string|null $locale
+     *
      * @return bool
      */
     public function hasForLocale($key, $locale = null)
@@ -77,9 +79,10 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Determine if a translation exists.
      *
-     * @param  string  $key
-     * @param  string|null  $locale
-     * @param  bool  $fallback
+     * @param string      $key
+     * @param string|null $locale
+     * @param bool        $fallback
+     *
      * @return bool
      */
     public function has($key, $locale = null, $fallback = true)
@@ -90,10 +93,11 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Get the translation for the given key.
      *
-     * @param  string  $key
-     * @param  array   $replace
-     * @param  string|null  $locale
-     * @param  bool  $fallback
+     * @param string      $key
+     * @param array       $replace
+     * @param string|null $locale
+     * @param bool        $fallback
+     *
      * @return string|array|null
      */
     public function get($key, array $replace = [], $locale = null, $fallback = true)
@@ -112,7 +116,7 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
                 $namespace, $group, $locale, $item, $replace
             );
 
-            if (! is_null($line)) {
+            if (!is_null($line)) {
                 break;
             }
         }
@@ -120,7 +124,7 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
         // If the line doesn't exist, we will return back the key which was requested as
         // that will be quick to spot in the UI if language keys are wrong or missing
         // from the application's language files. Otherwise we can return the line.
-        if (! isset($line)) {
+        if (!isset($line)) {
             return $key;
         }
 
@@ -130,9 +134,10 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Add translation lines to the given locale.
      *
-     * @param  array  $lines
-     * @param  string  $locale
-     * @param  string  $namespace
+     * @param array  $lines
+     * @param string $locale
+     * @param string $namespace
+     *
      * @return void
      */
     public function addLines(array $lines, $locale, $namespace = '*')
@@ -147,11 +152,12 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Retrieve a language line out the loaded array.
      *
-     * @param  string  $namespace
-     * @param  string  $group
-     * @param  string  $locale
-     * @param  string  $item
-     * @param  array   $replace
+     * @param string $namespace
+     * @param string $group
+     * @param string $locale
+     * @param string $item
+     * @param array  $replace
+     *
      * @return string|array|null
      */
     protected function getLine($namespace, $group, $locale, $item, array $replace)
@@ -168,8 +174,9 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Make the place-holder replacements on a line.
      *
-     * @param  string  $line
-     * @param  array   $replace
+     * @param string $line
+     * @param array  $replace
+     *
      * @return string
      */
     protected function makeReplacements($line, array $replace)
@@ -190,7 +197,8 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Sort the replacements array.
      *
-     * @param  array  $replace
+     * @param array $replace
+     *
      * @return array
      */
     protected function sortReplacements(array $replace)
@@ -203,10 +211,11 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Get a translation according to an integer value.
      *
-     * @param  string  $key
-     * @param  int|array|\Countable  $number
-     * @param  array   $replace
-     * @param  string  $locale
+     * @param string               $key
+     * @param int|array|\Countable $number
+     * @param array                $replace
+     * @param string               $locale
+     *
      * @return string
      */
     public function choice($key, $number, array $replace = [], $locale = null)
@@ -225,10 +234,11 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Get the translation for a given key.
      *
-     * @param  string  $id
-     * @param  array   $parameters
-     * @param  string  $domain
-     * @param  string  $locale
+     * @param string $id
+     * @param array  $parameters
+     * @param string $domain
+     * @param string $locale
+     *
      * @return string|array|null
      */
     public function trans($id, array $parameters = [], $domain = 'messages', $locale = null)
@@ -239,11 +249,12 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Get a translation according to an integer value.
      *
-     * @param  string  $id
-     * @param  int|array|\Countable  $number
-     * @param  array   $parameters
-     * @param  string  $domain
-     * @param  string  $locale
+     * @param string               $id
+     * @param int|array|\Countable $number
+     * @param array                $parameters
+     * @param string               $domain
+     * @param string               $locale
+     *
      * @return string
      */
     public function transChoice($id, $number, array $parameters = [], $domain = 'messages', $locale = null)
@@ -254,9 +265,10 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Load the specified language group.
      *
-     * @param  string  $namespace
-     * @param  string  $group
-     * @param  string  $locale
+     * @param string $namespace
+     * @param string $group
+     * @param string $locale
+     *
      * @return void
      */
     public function load($namespace, $group, $locale)
@@ -276,9 +288,10 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Determine if the given group has been loaded.
      *
-     * @param  string  $namespace
-     * @param  string  $group
-     * @param  string  $locale
+     * @param string $namespace
+     * @param string $group
+     * @param string $locale
+     *
      * @return bool
      */
     protected function isLoaded($namespace, $group, $locale)
@@ -289,8 +302,9 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Add a new namespace to the loader.
      *
-     * @param  string  $namespace
-     * @param  string  $hint
+     * @param string $namespace
+     * @param string $hint
+     *
      * @return void
      */
     public function addNamespace($namespace, $hint)
@@ -301,7 +315,8 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Parse a key into namespace, group, and item.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return array
      */
     public function parseKey($key)
@@ -318,7 +333,8 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Get the array of locales to be checked.
      *
-     * @param  string|null  $locale
+     * @param string|null $locale
+     *
      * @return array
      */
     protected function parseLocale($locale)
@@ -333,8 +349,8 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
      */
     public function getSelector()
     {
-        if (! isset($this->selector)) {
-            $this->selector = new MessageSelector;
+        if (!isset($this->selector)) {
+            $this->selector = new MessageSelector();
         }
 
         return $this->selector;
@@ -343,7 +359,8 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Set the message selector instance.
      *
-     * @param  \Symfony\Component\Translation\MessageSelector  $selector
+     * @param \Symfony\Component\Translation\MessageSelector $selector
+     *
      * @return void
      */
     public function setSelector(MessageSelector $selector)
@@ -384,7 +401,8 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Set the default locale.
      *
-     * @param  string  $locale
+     * @param string $locale
+     *
      * @return void
      */
     public function setLocale($locale)
@@ -405,7 +423,8 @@ class Translator extends NamespacedItemResolver implements TranslatorInterface
     /**
      * Set the fallback locale being used.
      *
-     * @param  string  $fallback
+     * @param string $fallback
+     *
      * @return void
      */
     public function setFallback($fallback)
