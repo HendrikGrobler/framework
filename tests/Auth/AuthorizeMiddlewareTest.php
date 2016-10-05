@@ -1,17 +1,17 @@
 <?php
 
-use Mockery as m;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Router;
-use Illuminate\Auth\Access\Gate;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Container\Container;
-use Illuminate\Auth\Middleware\Authorize;
-use Illuminate\Contracts\Routing\Registrar;
-use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Auth\Access\Gate;
+use Illuminate\Auth\Middleware\Authorize;
+use Illuminate\Container\Container;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Contracts\Routing\Registrar;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Routing\Router;
+use Mockery as m;
 
 class AuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 {
@@ -27,9 +27,9 @@ class AuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->user = new stdClass;
+        $this->user = new stdClass();
 
-        Container::setInstance($this->container = new Container);
+        Container::setInstance($this->container = new Container());
 
         $this->container->singleton(Auth::class, function () {
             $auth = m::mock(Auth::class);
@@ -44,7 +44,7 @@ class AuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
             });
         });
 
-        $this->router = new Router(new Dispatcher, $this->container);
+        $this->router = new Router(new Dispatcher(), $this->container);
 
         $this->container->singleton(Registrar::class, function () {
             return $this->router;
@@ -63,7 +63,7 @@ class AuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
         $this->router->get('dashboard', [
             'middleware' => Authorize::class.':view-dashboard',
-            'uses' => function () {
+            'uses'       => function () {
                 return 'success';
             },
         ]);
@@ -79,7 +79,7 @@ class AuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
         $this->router->get('dashboard', [
             'middleware' => Authorize::class.':view-dashboard',
-            'uses' => function () {
+            'uses'       => function () {
                 return 'success';
             },
         ]);
@@ -101,7 +101,7 @@ class AuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
         $this->router->get('users/create', [
             'middleware' => [SubstituteBindings::class, Authorize::class.':create,App\User'],
-            'uses' => function () {
+            'uses'       => function () {
                 return 'success';
             },
         ]);
@@ -119,7 +119,7 @@ class AuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
         $this->router->get('users/create', [
             'middleware' => Authorize::class.':create,App\User',
-            'uses' => function () {
+            'uses'       => function () {
                 return 'success';
             },
         ]);
@@ -133,7 +133,7 @@ class AuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(AuthorizationException::class);
 
-        $post = new stdClass;
+        $post = new stdClass();
 
         $this->router->bind('post', function () use ($post) {
             return $post;
@@ -147,7 +147,7 @@ class AuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
         $this->router->get('posts/{post}/edit', [
             'middleware' => [SubstituteBindings::class, Authorize::class.':edit,post'],
-            'uses' => function () {
+            'uses'       => function () {
                 return 'success';
             },
         ]);
@@ -157,7 +157,7 @@ class AuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
     public function testModelAuthorized()
     {
-        $post = new stdClass;
+        $post = new stdClass();
 
         $this->router->bind('post', function () use ($post) {
             return $post;
@@ -171,7 +171,7 @@ class AuthorizeMiddlewareTest extends PHPUnit_Framework_TestCase
 
         $this->router->get('posts/{post}/edit', [
             'middleware' => [SubstituteBindings::class, Authorize::class.':edit,post'],
-            'uses' => function () {
+            'uses'       => function () {
                 return 'success';
             },
         ]);

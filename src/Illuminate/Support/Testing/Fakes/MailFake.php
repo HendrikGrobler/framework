@@ -2,8 +2,8 @@
 
 namespace Illuminate\Support\Testing\Fakes;
 
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Support\Collection;
 use PHPUnit_Framework_Assert as PHPUnit;
 
 class MailFake implements Mailer
@@ -18,8 +18,9 @@ class MailFake implements Mailer
     /**
      * Assert if a mailable was sent based on a truth-test callback.
      *
-     * @param  string  $mailable
-     * @param  callable|null  $callback
+     * @param string        $mailable
+     * @param callable|null $callback
+     *
      * @return void
      */
     public function assertSent($mailable, $callback = null)
@@ -33,9 +34,10 @@ class MailFake implements Mailer
     /**
      * Assert if a mailable was sent based on a truth-test callback.
      *
-     * @param  mixed  $users
-     * @param  string  $mailable
-     * @param  callable|null  $callback
+     * @param mixed         $users
+     * @param string        $mailable
+     * @param callable|null $callback
+     *
      * @return void
      */
     public function assertSentTo($users, $mailable, $callback = null)
@@ -43,11 +45,11 @@ class MailFake implements Mailer
         $users = $this->formatRecipients($users);
 
         return $this->assertSent($mailable, function ($mailable, $to) use ($users, $callback) {
-            if (! $this->recipientsMatch($users, $this->formatRecipients($to))) {
+            if (!$this->recipientsMatch($users, $this->formatRecipients($to))) {
                 return false;
             }
 
-            if (! is_null($callback)) {
+            if (!is_null($callback)) {
                 return $callback(...func_get_args());
             }
 
@@ -58,7 +60,8 @@ class MailFake implements Mailer
     /**
      * Format the recipients into a collection.
      *
-     * @param  mixed  $recipients
+     * @param mixed $recipients
+     *
      * @return \Illuminate\Support\Collection
      */
     protected function formatRecipients($recipients)
@@ -73,8 +76,9 @@ class MailFake implements Mailer
     /**
      * Determine if two given recipient lists match.
      *
-     * @param  \Illuminate\Support\Collection  $expected
-     * @param  \Illuminate\Support\Collection  $recipients
+     * @param \Illuminate\Support\Collection $expected
+     * @param \Illuminate\Support\Collection $recipients
+     *
      * @return bool
      */
     protected function recipientsMatch($expected, $recipients)
@@ -91,8 +95,9 @@ class MailFake implements Mailer
     /**
      * Determine if a mailable was sent based on a truth-test callback.
      *
-     * @param  string  $mailable
-     * @param  callable|null  $callback
+     * @param string        $mailable
+     * @param callable|null $callback
+     *
      * @return void
      */
     public function assertNotSent($mailable, $callback = null)
@@ -106,13 +111,14 @@ class MailFake implements Mailer
     /**
      * Get all of the mailables matching a truth-test callback.
      *
-     * @param  string  $mailable
-     * @param  callable|null  $callback
+     * @param string        $mailable
+     * @param callable|null $callback
+     *
      * @return \Illuminate\Support\Collection
      */
     public function sent($mailable, $callback = null)
     {
-        if (! $this->hasSent($mailable)) {
+        if (!$this->hasSent($mailable)) {
             return collect();
         }
 
@@ -128,7 +134,8 @@ class MailFake implements Mailer
     /**
      * Determine if the given mailable has been sent.
      *
-     * @param  string  $mailable
+     * @param string $mailable
+     *
      * @return bool
      */
     public function hasSent($mailable)
@@ -139,7 +146,8 @@ class MailFake implements Mailer
     /**
      * Get all of the mailed mailables for a given type.
      *
-     * @param  string  $type
+     * @param string $type
+     *
      * @return \Illuminate\Support\Collection
      */
     protected function mailablesOf($type)
@@ -152,12 +160,13 @@ class MailFake implements Mailer
     /**
      * Begin the process of mailing a mailable class instance.
      *
-     * @param  mixed  $users
+     * @param mixed $users
+     *
      * @return MailableMailer
      */
     public function to($users)
     {
-        $this->mailables[] = $mailable = (new MailableFake)->to($users);
+        $this->mailables[] = $mailable = (new MailableFake())->to($users);
 
         return $mailable;
     }
@@ -165,12 +174,13 @@ class MailFake implements Mailer
     /**
      * Begin the process of mailing a mailable class instance.
      *
-     * @param  mixed  $users
+     * @param mixed $users
+     *
      * @return MailableMailer
      */
     public function bcc($users)
     {
-        $this->mailables[] = $mailable = (new MailableFake)->bcc($users);
+        $this->mailables[] = $mailable = (new MailableFake())->bcc($users);
 
         return $mailable;
     }
@@ -178,8 +188,9 @@ class MailFake implements Mailer
     /**
      * Send a new message when only a raw text part.
      *
-     * @param  string  $text
-     * @param  \Closure|string  $callback
+     * @param string          $text
+     * @param \Closure|string $callback
+     *
      * @return int
      */
     public function raw($text, $callback)
@@ -190,9 +201,10 @@ class MailFake implements Mailer
     /**
      * Send a new message using a view.
      *
-     * @param  string|array  $view
-     * @param  array  $data
-     * @param  \Closure|string  $callback
+     * @param string|array    $view
+     * @param array           $data
+     * @param \Closure|string $callback
+     *
      * @return void
      */
     public function send($view, array $data = [], $callback = null)

@@ -1,8 +1,8 @@
 <?php
 
-use Mockery as m;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as BaseCollection;
+use Mockery as m;
 
 class DatabaseEloquentCollectionTest extends PHPUnit_Framework_TestCase
 {
@@ -256,7 +256,7 @@ class DatabaseEloquentCollectionTest extends PHPUnit_Framework_TestCase
 
     public function testMakeHiddenAddsHiddenOnEntireCollection()
     {
-        $c = new Collection([new TestEloquentCollectionModel]);
+        $c = new Collection([new TestEloquentCollectionModel()]);
         $c = $c->makeHidden(['visible']);
 
         $this->assertEquals(['hidden', 'visible'], $c[0]->getHidden());
@@ -264,7 +264,7 @@ class DatabaseEloquentCollectionTest extends PHPUnit_Framework_TestCase
 
     public function testMakeVisibleRemovesHiddenFromEntireCollection()
     {
-        $c = new Collection([new TestEloquentCollectionModel]);
+        $c = new Collection([new TestEloquentCollectionModel()]);
         $c = $c->makeVisible(['hidden']);
 
         $this->assertEquals([], $c[0]->getHidden());
@@ -284,7 +284,7 @@ class DatabaseEloquentCollectionTest extends PHPUnit_Framework_TestCase
 
     public function testMakeVisibleRemovesHiddenAndIncludesVisible()
     {
-        $c = new Collection([new TestEloquentCollectionModel]);
+        $c = new Collection([new TestEloquentCollectionModel()]);
         $c = $c->makeVisible('hidden');
 
         $this->assertEquals([], $c[0]->getHidden());
@@ -293,7 +293,7 @@ class DatabaseEloquentCollectionTest extends PHPUnit_Framework_TestCase
 
     public function testQueueableCollectionImplementation()
     {
-        $c = new Collection([new TestEloquentCollectionModel, new TestEloquentCollectionModel]);
+        $c = new Collection([new TestEloquentCollectionModel(), new TestEloquentCollectionModel()]);
         $this->assertEquals(TestEloquentCollectionModel::class, $c->getQueueableClass());
     }
 
@@ -302,7 +302,7 @@ class DatabaseEloquentCollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testQueueableCollectionImplementationThrowsExceptionOnMultipleModelTypes()
     {
-        $c = new Collection([new TestEloquentCollectionModel, (object) ['id' => 'something']]);
+        $c = new Collection([new TestEloquentCollectionModel(), (object) ['id' => 'something']]);
         $c->getQueueableClass();
     }
 }

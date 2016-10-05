@@ -59,8 +59,9 @@ class MailMessage extends SimpleMessage
     /**
      * Set the view for the mail message.
      *
-     * @param  string  $view
-     * @param  array  $data
+     * @param string $view
+     * @param array  $data
+     *
      * @return $this
      */
     public function view($view, array $data = [])
@@ -74,8 +75,9 @@ class MailMessage extends SimpleMessage
     /**
      * Set the from address for the mail message.
      *
-     * @param  string  $address
-     * @param  string|null  $name
+     * @param string      $address
+     * @param string|null $name
+     *
      * @return $this
      */
     public function from($address, $name = null)
@@ -88,7 +90,8 @@ class MailMessage extends SimpleMessage
     /**
      * Set the recipient address for the mail message.
      *
-     * @param  string|array  $address
+     * @param string|array $address
+     *
      * @return $this
      */
     public function to($address)
@@ -101,8 +104,9 @@ class MailMessage extends SimpleMessage
     /**
      * Attach a file to the message.
      *
-     * @param  string  $file
-     * @param  array  $options
+     * @param string $file
+     * @param array  $options
+     *
      * @return $this
      */
     public function attach($file, array $options = [])
@@ -115,9 +119,10 @@ class MailMessage extends SimpleMessage
     /**
      * Attach in-memory data as an attachment.
      *
-     * @param  string  $data
-     * @param  string  $name
-     * @param  array  $options
+     * @param string $data
+     * @param string $name
+     * @param array  $options
+     *
      * @return $this
      */
     public function attachData($data, $name, array $options = [])
@@ -132,7 +137,8 @@ class MailMessage extends SimpleMessage
      *
      * The value is an integer where 1 is the highest priority and 5 is the lowest.
      *
-     * @param  int  $level
+     * @param int $level
+     *
      * @return $this
      */
     public function priority($level)
